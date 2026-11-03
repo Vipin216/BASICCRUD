@@ -1,10 +1,12 @@
-# Store these assignments as an SSM Parameter Store SecureString.
-# Replace every value. Use shell-compatible KEY=value syntax.
+# Environment file written on each instance by the launch-template bootstrap.
+# Never commit a filled-in copy of this file.
 DJANGO_DEBUG=0
 DJANGO_SECRET_KEY=replace-with-a-long-random-secret
-DJANGO_ALLOWED_HOSTS=notes.example.com
-DB_NAME=notes_db
-DB_USER=notes_app
+DJANGO_ALLOWED_HOSTS=cloud-alb-1068983986.ap-south-1.elb.amazonaws.com
+DB_NAME=postgres
+DB_USER=postgres
 DB_PASSWORD=replace-with-the-database-password
-DB_HOST=your-postgresql-hostname
+DB_HOST=database-1.cz8kgioai4z3.ap-south-1.rds.amazonaws.com
 DB_PORT=5432
+PGSSLMODE=verify-full
+PGSSLROOTCERT=/etc/ssl/certs/rds-global-bundle.pem
