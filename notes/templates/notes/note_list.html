@@ -1,0 +1,22 @@
+{% extends 'notes/base.html' %}
+{% block title %}All notes{% endblock %}
+{% block content %}
+<section class="page-heading">
+  <div><p class="eyebrow">YOUR NOTEBOOK</p><h1>All notes</h1><p class="muted">Keep your ideas in one place.</p></div>
+  <span class="count-pill">{{ notes|length }} {% if notes|length == 1 %}note{% else %}notes{% endif %}</span>
+</section>
+{% if notes %}
+  <div class="note-grid">
+  {% for note in notes %}
+    <article class="note-card">
+      <p class="card-date">Updated {{ note.updated_at|date:"M j, Y" }}</p>
+      <h2><a href="{% url 'notes:detail' note.pk %}">{{ note.title }}</a></h2>
+      <p class="card-excerpt">{{ note.content|truncatechars:150 }}</p>
+      <a class="text-link" href="{% url 'notes:detail' note.pk %}">Read note <span aria-hidden="true">→</span></a>
+    </article>
+  {% endfor %}
+  </div>
+{% else %}
+  <section class="empty-state"><div class="empty-icon">✎</div><h2>Your notebook is ready</h2><p>Start with a thought, a class note, or a reminder.</p><a class="button" href="{% url 'notes:create' %}">Create your first note</a></section>
+{% endif %}
+{% endblock %}

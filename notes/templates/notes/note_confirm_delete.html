@@ -1,0 +1,8 @@
+{% extends 'notes/base.html' %}
+{% block title %}Delete {{ note.title }}{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'notes:detail' note.pk %}">← Back to note</a>
+<section class="confirm-card"><div class="warning-icon">!</div><p class="eyebrow">DELETE NOTE</p><h1>Delete “{{ note.title }}”?</h1><p class="muted">This will permanently remove this note and its content. This action cannot be undone.</p>
+  <form method="post">{% csrf_token %}<div class="action-row"><button class="button button-danger" type="submit">Yes, delete note</button><a class="button button-quiet" href="{% url 'notes:detail' note.pk %}">Keep note</a></div></form>
+</section>
+{% endblock %}

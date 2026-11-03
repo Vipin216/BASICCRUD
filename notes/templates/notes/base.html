@@ -1,0 +1,21 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Notes{% endblock %} · NoteSpace</title>
+  <link rel="stylesheet" href="{% static 'notes/styles.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="{% url 'notes:list' %}"><span class="brand-mark">N</span> NoteSpace</a>
+    <a class="button button-light" href="{% url 'notes:create' %}">＋ New note</a>
+  </header>
+  <main class="container">
+    {% if messages %}<div class="messages" aria-live="polite">{% for message in messages %}<p class="message {{ message.tags }}">{{ message }}</p>{% endfor %}</div>{% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer">A simple space for your thoughts.</footer>
+</body>
+</html>

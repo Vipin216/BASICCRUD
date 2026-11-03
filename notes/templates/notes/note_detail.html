@@ -1,0 +1,11 @@
+{% extends 'notes/base.html' %}
+{% block title %}{{ note.title }}{% endblock %}
+{% block content %}
+<a class="back-link" href="{% url 'notes:list' %}">← All notes</a>
+<article class="detail-card">
+  <p class="eyebrow">NOTE DETAILS</p><h1>{{ note.title }}</h1>
+  <p class="detail-meta">Created {{ note.created_at|date:"F j, Y · g:i a" }} · Updated {{ note.updated_at|date:"F j, Y · g:i a" }}</p>
+  <div class="note-content">{{ note.content|linebreaks }}</div>
+  <div class="action-row"><a class="button" href="{% url 'notes:update' note.pk %}">Edit note</a><a class="button button-danger-outline" href="{% url 'notes:delete' note.pk %}">Delete</a></div>
+</article>
+{% endblock %}

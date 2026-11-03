@@ -1,0 +1,12 @@
+{% extends 'notes/base.html' %}
+{% block title %}{{ heading }}{% endblock %}
+{% block content %}
+<a class="back-link" href="{% if note %}{% url 'notes:detail' note.pk %}{% else %}{% url 'notes:list' %}{% endif %}">← Cancel</a>
+<section class="form-card"><p class="eyebrow">YOUR NOTEBOOK</p><h1>{{ heading }}</h1><p class="muted">Add a title and write down what you want to remember.</p>
+  <form method="post" novalidate>{% csrf_token %}
+    {% for field in form %}<div class="form-field"><label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}<span class="required">*</span>{% endif %}</label>{{ field }}{% if field.help_text %}<small>{{ field.help_text }}</small>{% endif %}{% for error in field.errors %}<p class="field-error">{{ error }}</p>{% endfor %}</div>{% endfor %}
+    {% if form.non_field_errors %}<div class="field-error">{{ form.non_field_errors }}</div>{% endif %}
+    <div class="action-row"><button class="button" type="submit">{{ button_label }}</button><a class="button button-quiet" href="{% if note %}{% url 'notes:detail' note.pk %}{% else %}{% url 'notes:list' %}{% endif %}">Cancel</a></div>
+  </form>
+</section>
+{% endblock %}
